@@ -1,13 +1,27 @@
 #include "file.h"
 
-File::File(string &n, int s, string &d) : name(n), size(s), create_date(d)
+File::File(const string &n, int s, string &d) : name(n), size(s), writing_date(d)
 {
 
 }
 
-string File::getDate()
+File::File(const string &n, int s) : name(n), size(s)
 {
-    return create_date;
+    if(size >= 1000)
+    {
+        unitSize = " Kilobytes";
+        size /= 1024;
+    }
+    else if(size >= 1e+6)
+    {
+        unitSize = "Megabytes";
+        size /= (1024 * 1024);
+    }
+}
+
+string File::getLastWritingDate()
+{
+    return writing_date;
 }
 
 string File::getName()
@@ -23,6 +37,6 @@ int File::getSize()
 void File::displayInfo()
 {
     cout << "Name : " << name << endl;
-    cout << "Size : " << size << endl;
-    cout << "Date of creation : " << create_date << endl;
+    cout << "Size : " << size << unitSize << endl << endl;
+    // cout << "Date of last writing : " << writing_date << endl;
 }
