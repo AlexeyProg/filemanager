@@ -36,7 +36,6 @@ int File::getSize()
 
 void File::displayInfo()
 {
-    cout << "Name : " << name << endl;
-    cout << "Size : " << size << unitSize << endl << endl;
+    cout << name << ", " << size << unitSize << endl;
     // cout << "Date of last writing : " << writing_date << endl;
 }

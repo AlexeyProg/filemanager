@@ -1,8 +1,9 @@
-#include <iostream>
-#include <fstream>
+#pragma once
 
+#include <iostream>
 
 using namespace std;
+
 
 class File
 {
@@ -16,6 +17,7 @@ public:
     virtual void displayInfo();
     virtual string getFormat() { return format ;};
     virtual ~File() = default;
+    string full_path;
 protected:
     string format;
     string type;

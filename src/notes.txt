@@ -1,0 +1,2 @@
+create image class
+add options to filemanaager::checktype
