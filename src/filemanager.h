@@ -1,5 +1,6 @@
 #include <filesystem>
 #include <iostream>
+#include <memory>
 
 #include "textfile.h"
 
@@ -14,7 +15,7 @@ public:
 
     static void openFile(const filesystem::path &p);
     
-    static File* checkType(const filesystem::path &p);
+    static unique_ptr<File> checkType(const filesystem::path &p);
 
     static void showInfo(string &filename);
     static void createFile(string &filename);

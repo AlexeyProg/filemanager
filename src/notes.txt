@@ -1,2 +1,5 @@
 create image class
 add options to filemanaager::checktype
+need to add some smart pointers
+
+use try catch

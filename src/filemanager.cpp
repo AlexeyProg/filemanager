@@ -38,14 +38,17 @@ void FileManager::openFile(const filesystem::path &p)
         cout << "file cant be opened"; // need exception
 } 
 
-File* FileManager::checkType(const filesystem::path &p)
+unique_ptr<File> FileManager::checkType(const filesystem::path &p)
 {
     if(p.extension().string() == ".h" || p.extension().string() == ".cpp" || p.extension().string() == ".txt")
     {
         string filename = p.filename().string();
         int size = static_cast<int>(filesystem::file_size(p));
         string format = p.extension().string();
-        return new TextFile(filename, size, format);   
+
+        unique_ptr<File> txt = make_unique<TextFile>(filename, size, format);
+        return txt;
+        //return make_unique<TextFile>(filename, size, format);   
     }
     else
     {
