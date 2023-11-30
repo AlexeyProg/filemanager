@@ -1,6 +1,6 @@
 #include "file.h"
 
-File::File(const string &n, int s, string &d) : name(n), size(s), writing_date(d)
+File::File(const string &n, int s, const string &d) : name(n), size(s), writing_date(d)
 {
 
 }
@@ -36,6 +36,6 @@ int File::getSize()
 
 void File::displayInfo()
 {
-    cout << name << ", " << size << unitSize << endl;
+    cout << name << ", " << size << unitSize << ", " << getLastWritingDate() << endl;
     // cout << "Date of last writing : " << writing_date << endl;
 }

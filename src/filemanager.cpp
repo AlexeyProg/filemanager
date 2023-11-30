@@ -2,14 +2,6 @@
 #include <fstream>
 
 
-// void FileManager::showContent(const filesystem::path &p)
-// {
-//     for(const auto &it : filesystem::directory_iterator(p))
-//     {
-//         //cout << it << endl; //filepath _ name
-//     }
-// }
-
 void FileManager::showAll(const filesystem::path &p)
 {
     for(const auto &it : filesystem::directory_iterator(p))
@@ -17,7 +9,7 @@ void FileManager::showAll(const filesystem::path &p)
         if(it.is_regular_file())
         {
             File *new_file = new File(it.path().filename().string(), static_cast<int>(it.file_size()));
-            new_file->displayInfo();
+            cout << new_file->getName() << endl;
         }
     }
 }
@@ -40,7 +32,8 @@ void FileManager::openFile(const filesystem::path &p)
 
 unique_ptr<File> FileManager::checkType(const filesystem::path &p)
 {
-    if(p.extension().string() == ".h" || p.extension().string() == ".cpp" || p.extension().string() == ".txt")
+    if(p.extension().string() == ".h" || p.extension().string() == ".cpp" || p.extension().string() == ".txt"
+        || p.extension().string() == ".docx")
     {
         string filename = p.filename().string();
         int size = static_cast<int>(filesystem::file_size(p));
@@ -50,16 +43,24 @@ unique_ptr<File> FileManager::checkType(const filesystem::path &p)
         return txt;
         //return make_unique<TextFile>(filename, size, format);   
     }
-    else
-    {
+    // else
+    // {
 
-    }
+    // }
     return nullptr;
 }
 
-void FileManager::showInfo(string &filename)
+void FileManager::showInfo(const filesystem::path &p)
 {
-
+    if(filesystem::exists(p))
+    {
+        if(!filesystem::is_directory(p))
+        {
+            int size = static_cast<int>(filesystem::file_size(p));
+            unique_ptr<File>file = make_unique<File>(p.filename().string(), size, p.extension().string());
+            file->displayInfo();
+        }
+    }
 }
 void FileManager::createFile(string &filename)
 {

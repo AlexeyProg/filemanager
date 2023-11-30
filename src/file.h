@@ -8,7 +8,7 @@ using namespace std;
 class File
 {
 public:
-    File(const string &n, int s, string &d);
+    File(const string &n, int s, const string &d);
     File(const string &n, int s);
 
     int getSize();
